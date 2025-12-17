@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Horror Story - Spine-Chilling Tales</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Special+Elite&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .page-container {
+      height: 100%;
+      width: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    
+    .page {
+      min-height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 2rem;
+      position: relative;
+    }
+    
+    .blood-drip {
+      position: absolute;
+      top: 0;
+      width: 2px;
+      height: 0;
+      background: linear-gradient(to bottom, #8b0000, #dc143c);
+      animation: drip 3s ease-in-out infinite;
+      opacity: 0.7;
+    }
+    
+    @keyframes drip {
+      0% { height: 0; }
+      50% { height: 100px; }
+      100% { height: 0; }
+    }
+    
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    .glow {
+      text-shadow: 0 0 10px #dc143c, 0 0 20px #dc143c, 0 0 30px #dc143c;
+    }
+    
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid #8b0000;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-dot.active {
+      background: #dc143c;
+      box-shadow: 0 0 10px #dc143c;
+    }
+    
+    .nav-dot:hover {
+      transform: scale(1.3);
+      border-color: #dc143c;
+    }
+    
+    .story-card {
+      background: rgba(20, 20, 20, 0.9);
+      border: 2px solid #8b0000;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .story-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(220, 20, 60, 0.3);
+      border-color: #dc143c;
+    }
+    
+    .team-member {
+      background: rgba(20, 20, 20, 0.8);
+      border: 2px solid #8b0000;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem;
+      min-width: 250px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .team-member:hover {
+      border-color: #dc143c;
+      box-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+    }
+    
+    .faq-item {
+      background: rgba(20, 20, 20, 0.8);
+      border: 2px solid #8b0000;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .faq-item:hover {
+      border-color: #dc143c;
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    
+    .faq-answer.open {
+      max-height: 500px;
+      margin-top: 1rem;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div class="page-container" style="background: linear-gradient(to bottom, #0a0a0a, #1a0a0a);"><!-- Navigation Dots -->
+   <div style="position: fixed; right: 2rem; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 1rem;">
+    <div class="nav-dot active" onclick="scrollToPage(0)" title="Home"></div>
+    <div class="nav-dot" onclick="scrollToPage(1)" title="Team"></div>
+    <div class="nav-dot" onclick="scrollToPage(2)" title="Stories"></div>
+    <div class="nav-dot" onclick="scrollToPage(3)" title="Story 1"></div>
+    <div class="nav-dot" onclick="scrollToPage(4)" title="Story 2"></div>
+    <div class="nav-dot" onclick="scrollToPage(5)" title="Story 3"></div>
+    <div class="nav-dot" onclick="scrollToPage(6)" title="Story 4"></div>
+    <div class="nav-dot" onclick="scrollToPage(7)" title="Story 5"></div>
+    <div class="nav-dot" onclick="scrollToPage(8)" title="Story 6"></div>
+    <div class="nav-dot" onclick="scrollToPage(9)" title="Story 7"></div>
+    <div class="nav-dot" onclick="scrollToPage(10)" title="Contact"></div>
+    <div class="nav-dot" onclick="scrollToPage(11)" title="FAQ"></div>
+   </div><!-- Blood Drips -->
+   <div class="blood-drip" style="left: 10%; animation-delay: 0s;"></div>
+   <div class="blood-drip" style="left: 30%; animation-delay: 1s;"></div>
+   <div class="blood-drip" style="left: 50%; animation-delay: 2s;"></div>
+   <div class="blood-drip" style="left: 70%; animation-delay: 0.5s;"></div>
+   <div class="blood-drip" style="left: 90%; animation-delay: 1.5s;"></div><!-- Page 1: Home -->
+   <div class="page" id="page-0">
+    <div class="floating" style="text-align: center; max-width: 800px;">
+     <h1 id="site-title" style="font-family: 'Nosifer', cursive; font-size: 4rem; color: #dc143c; margin-bottom: 1rem;" class="glow">THE HORROR STORY</h1>
+     <p id="tagline" style="font-family: 'Special Elite', cursive; font-size: 1.5rem; color: #b22222; margin-bottom: 2rem;">Where Nightmares Come to Life</p>
+     <div style="background: rgba(20, 20, 20, 0.9); border: 3px solid #8b0000; border-radius: 12px; padding: 2.5rem; box-shadow: 0 0 30px rgba(220, 20, 60, 0.3);">
+      <h2 style="font-family: 'Creepster', cursive; font-size: 2rem; color: #dc143c; margin-bottom: 1.5rem;">Welcome to the Darkness</h2>
+      <p id="home-specialty" style="font-family: 'Special Elite', cursive; font-size: 1.1rem; color: #cccccc; line-height: 1.8; margin-bottom: 1.5rem;">Step into our realm of terror where spine-chilling tales await. We specialize in crafting psychological horror stories that will haunt your dreams and keep you checking over your shoulder. Each story is carefully curated to deliver maximum fear, exploring the darkest corners of human imagination and supernatural dread.</p>
+      <p style="font-family: 'Special Elite', cursive; font-size: 1rem; color: #999999; font-style: italic;">⚠️ Warning: Not for the faint of heart. Read at your own risk.</p>
+     </div><button onclick="scrollToPage(1)" style="margin-top: 2rem; background: #8b0000; color: #fff; font-family: 'Special Elite', cursive; font-size: 1.1rem; padding: 1rem 2.5rem; border: 2px solid #dc143c; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 15px rgba(220, 20, 60, 0.5);" onmouseover="this.style.background='#dc143c'; this.style.transform='scale(1.05)'" onmouseout="this.style.background='#8b0000'; this.style.transform='scale(1)'"> Enter If You Dare → </button>
+    </div>
+   </div><!-- Page 2: Team -->
+   <div class="page" id="page-1" style="background: linear-gradient(to bottom, #1a0a0a, #0a0a0a);">
+    <h1 style="font-family: 'Nosifer', cursive; font-size: 3rem; color: #dc143c; margin-bottom: 3rem; text-align: center;" class="glow">Meet the Dark Minds</h1>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; max-width: 1200px; gap: 1rem;">
+     <div class="team-member">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">
+       👻
+      </div>
+      <h3 style="font-family: 'Creepster', cursive; font-size: 1.5rem; color: #dc143c; margin-bottom: 0.5rem;">Sana</h3>
+      <p style="font-family: 'Special Elite', cursive; color: #b22222; font-size: 0.9rem; margin-bottom: 0.5rem;">Founder &amp; Project Lead</p>
+      <p style="font-family: 'Special Elite', cursive; color: #999; font-size: 0.85rem;">The mastermind behind the madness</p>
+     </div>
+     <div class="team-member">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">
+       🕷️
+      </div>
+      <h3 style="font-family: 'Creepster', cursive; font-size: 1.5rem; color: #dc143c; margin-bottom: 0.5rem;">Layeeqa</h3>
+      <p style="font-family: 'Special Elite', cursive; color: #b22222; font-size: 0.9rem; margin-bottom: 0.5rem;">Assistant Project Coordinator</p>
+      <p style="font-family: 'Special Elite', cursive; color: #999; font-size: 0.85rem;">Audience Engagement Lead</p>
+     </div>
+     <div class="team-member">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">
+       🦇
+      </div>
+      <h3 style="font-family: 'Creepster', cursive; font-size: 1.5rem; color: #dc143c; margin-bottom: 0.5rem;">Tasneem</h3>
+      <p style="font-family: 'Special Elite', cursive; color: #b22222; font-size: 0.9rem; margin-bottom: 0.5rem;">Assistant Project Coordinator</p>
+      <p style="font-family: 'Special Elite', cursive; color: #999; font-size: 0.85rem;">Layout Designer</p>
+     </div>
+     <div class="team-member">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">
+       🔮
+      </div>
+      <h3 style="font-family: 'Creepster', cursive; font-size: 1.5rem; color: #dc143c; margin-bottom: 0.5rem;">Zainab</h3>
+      <p style="font-family: 'Special Elite', cursive; color: #b22222; font-size: 0.9rem; margin-bottom: 0.5rem;">Visual &amp; Background Design</p>
+      <p style="font-family: 'Special Elite', cursive; color: #999; font-size: 0.85rem;">Specialist</p>
+     </div>
+     <div class="team-member">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">
+       💀
+      </div>
+      <h3 style="font-family: 'Creepster', cursive; font-size: 1.5rem; color: #dc143c; margin-bottom: 0.5rem;">Afnaan</h3>
+      <p style="font-family: 'Special Elite', cursive; color: #b22222; font-size: 0.9rem; margin-bottom: 0.5rem;">Design Assistant</p>
+      <p style="font-family: 'Special Elite', cursive; color: #999; font-size: 0.85rem;">Visual Support</p>
+     </div>
+    </div>
+   </div><!-- Page 3: Story List -->
+   <div class="page" id="page-2" style="background: linear-gradient(to bottom, #0a0a0a, #1a0a0a);">
+    <h1 style="font-family: 'Nosifer', cursive; font-size: 3rem; color: #dc143c; margin-bottom: 2rem; text-align: center;" class="glow">Tales of Terror</h1>
+    <div style="max-width: 900px; width: 100%;">
+     <div class="story-card" onclick="scrollToPage(3)">
+      <h3 style="font-family: 'Creepster', cursive; font-size: 1.8rem; color: #dc143c; margin-bottom: 1rem;">🏚️ The Abandoned Asylum</h3>
+      <p style="font-family: 'Special Elite', cursive; color: #ccc; line-height: 1.6;">A group of friends explore an old psychiatric hospital, only to discover they're not alone. The patients never left...</p>
+     </div>
+     <div class="story-card" onclick="scrollToPage(4)">
+      <h3 style="font-family: 'Creepster', cursive; font-size: 1.8rem; color: #dc143c; margin-bottom: 1rem;">🪞 The Mirror's Reflection</h3>
+      <p style="font-family: 'Special Elite', cursive; color: #ccc; line-height: 1.6;">An antique mirror shows more than just your reflection. It reveals what's standing behind you...</p>
+     </div>
+     <div class="story-card" onclick="scrollToPage(5)">
+      <h3 style="font-family: 'Creepster', cursive; font-size: 1.8rem; color: #dc143c; margin-bottom: 1rem;">🌲 Whispers in the Woods</h3>
+      <p style="font-family: 'Special Elite', cursive; color: #ccc; line-height: 1.6;">A camping trip turns deadly when the forest starts calling your name. Some places are forbidden for a reason...</p>
+     </div>
+     <div class="story-card" onclick="scrollToPage(6)">
+      <h3 style="font-family: 'Creepster', cursive; font-size: 1.8rem; color: #dc143c; margin-bottom: 1rem;">📞 The Last Phone Call</h3>
+      <p style="font-family: 'Special Elite', cursive; color: #ccc; line-height: 1.6;">She receives calls from her deceased sister's phone. Each call reveals a darker secret about her death...</p>
+     </div>
+     <div class="story-card" onclick="scrollToPage(7)">
+      <h3 style="font-family: 'Creepster', cursive; font-size: 1.8rem; color: #dc143c; margin-bottom: 1rem;">🎭 The Doll Collector</h3>
+      <p style="font-family: 'Special Elite', cursive; color: #ccc; line-height: 1.6;">An inheritance of antique dolls comes with a curse. At night, they move on their own...</p>
+     </div>
+     <div class="story-card" onclick="scrollToPage(8)">
+      <h3 style="font-family: 'Creepster', cursive; font-size: 1.8rem; color: #dc143c; margin-bottom: 1rem;">🚪 Room 237</h3>
+      <p style="font-family: 'Special Elite', cursive; color: #ccc; line-height: 1.6;">A hotel room that shouldn't exist. Guests check in but they never check out...</p>
+     </div>
+     <div class="story-card" onclick="scrollToPage(9)">
+      <h3 style="font-family: 'Creepster', cursive; font-size: 1.8rem; color: #dc143c; margin-bottom: 1rem;">👁️ The Watcher</h3>
+      <p style="font-family: 'Special Elite', cursive; color: #ccc; line-height: 1.6;">Someone is watching through your windows. You can feel their eyes, but you can never see them...</p>
+     </div>
+    </div>
+   </div><!-- Story Pages 4-10 -->
+   <div class="page" id="page-3" style="background: linear-gradient(to bottom, #1a0a0a, #0a0a0a);">
+    <div style="max-width: 800px; background: rgba(20, 20, 20, 0.95); border: 3px solid #8b0000; border-radius: 12px; padding: 3rem;">
+     <h2 style="font-family: 'Creepster', cursive; font-size: 2.5rem; color: #dc143c; margin-bottom: 2rem; text-align: center;">🏚️ The Abandoned Asylum</h2>
+     <div style="font-family: 'Special Elite', cursive; color: #ccc; font-size: 1.05rem; line-height: 1.8;">
+      <p style="margin-bottom: 1.5rem;">The rusty gates of Blackwood Asylum creaked open as five friends stepped inside. "This place has been abandoned for 40 years," Jake whispered, his flashlight cutting through the darkness.</p>
+      <p style="margin-bottom: 1.5rem;">Sarah felt a chill run down her spine. "Did you hear that?" A faint scratching echoed from somewhere deep within the building. "Probably just rats," Mike assured her, but his voice trembled.</p>
+      <p style="margin-bottom: 1.5rem;">As they ventured deeper, patient files lay scattered across the floor. Emily picked one up. "Listen to this: 'Patient shows signs of extreme aggression. Claims to hear voices telling him to wait. Wait for what?'"</p>
+      <p style="margin-bottom: 1.5rem;">The scratching grew louder. It was coming from the basement. Against their better judgment, they descended the stairs. The door at the bottom was covered in scratches from the inside.</p>
+      <p style="margin-bottom: 1.5rem;">"We should leave," Sarah pleaded. But it was too late. The door behind them slammed shut. In the darkness, they heard it—dozens of footsteps shuffling toward them.</p>
+      <p style="margin-bottom: 1.5rem;">"They've been waiting," a voice rasped from the shadows. "Waiting for new patients to join them..."</p>
+      <p style="color: #dc143c; font-style: italic; text-align: center;">The asylum was never abandoned. It was quarantined.</p>
+     </div>
+    </div>
+   </div>
+   <div class="page" id="page-4" style="background: linear-gradient(to bottom, #0a0a0a, #1a0a0a);">
+    <div style="max-width: 800px; background: rgba(20, 20, 20, 0.95); border: 3px solid #8b0000; border-radius: 12px; padding: 3rem;">
+     <h2 style="font-family: 'Creepster', cursive; font-size: 2.5rem; color: #dc143c; margin-bottom: 2rem; text-align: center;">🪞 The Mirror's Reflection</h2>
+     <div style="font-family: 'Special Elite', cursive; color: #ccc; font-size: 1.05rem; line-height: 1.8;">
+      <p style="margin-bottom: 1.5rem;">Laura couldn't resist the antique mirror at the estate sale. Its ornate frame seemed to whisper promises of beauty and truth. "Careful with that one," the elderly seller warned. "It shows things that should stay hidden."</p>
+      <p style="margin-bottom: 1.5rem;">That night, Laura hung it in her bedroom. As she brushed her hair, she noticed something odd. Her reflection moved a second too slow, as if lagging behind reality.</p>
+      <p style="margin-bottom: 1.5rem;">Days passed, and the mirror's strangeness grew. Laura saw shadows in the reflection that weren't in her room. Dark figures standing just behind her, their faces obscured.</p>
+      <p style="margin-bottom: 1.5rem;">One night, she woke to find herself standing before the mirror. But her reflection wasn't looking back—it was looking at something behind her. Laura slowly turned around.</p>
+      <p style="margin-bottom: 1.5rem;">Nothing was there. When she looked back at the mirror, her reflection was smiling. A smile she hadn't made. The reflection raised a finger to its lips. "Shhh... they can only see you through me."</p>
+      <p style="margin-bottom: 1.5rem;">Laura tried to run, but her legs wouldn't move. In the mirror, countless pale hands reached out from the darkness behind her reflection, pulling it back into the glass.</p>
+      <p style="color: #dc143c; font-style: italic; text-align: center;">The next morning, Laura's roommate found her standing motionless before the mirror, her eyes vacant. In the reflection, something else stared back.</p>
+     </div>
+    </div>
+   </div>
+   <div class="page" id="page-5" style="background: linear-gradient(to bottom, #1a0a0a, #0a0a0a);">
+    <div style="max-width: 800px; background: rgba(20, 20, 20, 0.95); border: 3px solid #8b0000; border-radius: 12px; padding: 3rem;">
+     <h2 style="font-family: 'Creepster', cursive; font-size: 2.5rem; color: #dc143c; margin-bottom: 2rem; text-align: center;">🌲 Whispers in the Woods</h2>
+     <div style="font-family: 'Special Elite', cursive; color: #ccc; font-size: 1.05rem; line-height: 1.8;">
+      <p style="margin-bottom: 1.5rem;">The hiking trail was supposed to be beginner-friendly. But Marcus and his friends took a wrong turn, and now the forest had swallowed them whole.</p>
+      <p style="margin-bottom: 1.5rem;">"Marcus..." The whisper came from everywhere and nowhere. "Did you guys hear that?" he asked, but his friends shook their heads, continuing to argue about which direction to take.</p>
+      <p style="margin-bottom: 1.5rem;">"Marcus... come here..." The voice was clearer now, almost melodic. It seemed to come from deeper in the woods. Against his better judgment, Marcus followed it, leaving his friends behind.</p>
+      <p style="margin-bottom: 1.5rem;">The trees grew denser, their branches forming a canopy that blocked out the sun. "Marcus... closer..." He pushed through the undergrowth until he reached a clearing.</p>
+      <p style="margin-bottom: 1.5rem;">In the center stood a circle of ancient stones. On each stone, a name was carved. His blood ran cold when he saw the last one: Marcus Chen - Today's Date.</p>
+      <p style="margin-bottom: 1.5rem;">"You found us," the voices chorused, no longer whispers but a cacophony of screams. The ground beneath the stones began to crack open.</p>
+      <p style="color: #dc143c; font-style: italic; text-align: center;">His friends never found him. But sometimes, hikers report hearing a new voice in the woods, calling their names...</p>
+     </div>
+    </div>
+   </div>
+   <div class="page" id="page-6" style="background: linear-gradient(to bottom, #0a0a0a, #1a0a0a);">
+    <div style="max-width: 800px; background: rgba(20, 20, 20, 0.95); border: 3px solid #8b0000; border-radius: 12px; padding: 3rem;">
+     <h2 style="font-family: 'Creepster', cursive; font-size: 2.5rem; color: #dc143c; margin-bottom: 2rem; text-align: center;">📞 The Last Phone Call</h2>
+     <div style="font-family: 'Special Elite', cursive; color: #ccc; font-size: 1.05rem; line-height: 1.8;">
+      <p style="margin-bottom: 1.5rem;">Three months after her sister's funeral, Rachel's phone rang at 3 AM. The caller ID showed Emma's number. Her dead sister's number.</p>
+      <p style="margin-bottom: 1.5rem;">With trembling hands, Rachel answered. Static filled the line, then a familiar voice: "Rachel... help me..." It was Emma, but her voice sounded distant, hollow.</p>
+      <p style="margin-bottom:
